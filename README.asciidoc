@@ -1,0 +1,3 @@
+= 2019-2020-Stage-Blog
+Doc Writer <vincent.bockaert@student.odisee.be>
+:icons: font
