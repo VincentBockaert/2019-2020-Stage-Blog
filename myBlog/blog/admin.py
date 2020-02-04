@@ -10,7 +10,7 @@ class BlogInline(admin.StackedInline):
 
 
 class BlogAdmin(admin.ModelAdmin):
-    fields = ['title','author','pub_date','content']
+    fields = ['title','author','pub_date','description','content']
 
 class AuthorAdmin(admin.ModelAdmin):
     fields = ['full_name']
