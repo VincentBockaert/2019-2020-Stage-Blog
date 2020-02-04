@@ -1,0 +1,10 @@
+{% if formErrors %}
+<div class="box" id="boxError">
+    <p class="text-danger">Eén of meerdere fouten werden gededecteerd:</p>
+    <ul class="text-danger">
+        {% for formError in formErrors %}
+        <li>{{ formError|raw }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}

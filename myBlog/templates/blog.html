@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block customcss %}
+    <link rel="stylesheet" type="text/css" href="{% static "/css/style.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "/css/index.css" %}">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    {% if latest_blog_posts_list %}
+    <ul>
+    {% for blogpost in latest_blog_posts_list %}
+        <li><a href="/blog/{{ blogpost.id }}/">{{ blogpost.title }}</a></li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>No blog posts available.</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block customjs %}
+
+    <script src="{% static "/js/asciidoctor.min.js" %}"></script>
+    <script type="text/javascript">
+        var asciidoctor = Asciidoctor()
+        var html = asciidoctor.convert('Hello, _Asciidoctor_ from *VB*')
+        console.log(html)
+    </script>
+{% endblock %}
