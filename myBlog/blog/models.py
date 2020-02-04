@@ -11,6 +11,7 @@ class Author(models.Model):
 class Blog(models.Model):
     pub_date = models.DateTimeField('Date published')
     title = models.CharField(max_length=200)
+    description = models.TextField(default="No description was found.")
     content = models.TextField()
     
     author = models.ForeignKey(Author, on_delete=models.CASCADE)

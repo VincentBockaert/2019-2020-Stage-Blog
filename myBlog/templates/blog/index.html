@@ -1,8 +1,7 @@
-{% extends 'layout.html' %}
+{% extends '../layout.html' %}
 {% load static %}
 
 {% block customcss %}
-    <link rel="stylesheet" type="text/css" href="{% static "/css/style.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "/css/index.css" %}">
 {% endblock %}
 
@@ -21,11 +20,4 @@
 {% endblock %}
 
 {% block customjs %}
-
-    <script src="{% static "/js/asciidoctor.min.js" %}"></script>
-    <script type="text/javascript">
-        var asciidoctor = Asciidoctor()
-        var html = asciidoctor.convert('Hello, _Asciidoctor_ from *VB*')
-        console.log(html)
-    </script>
 {% endblock %}
