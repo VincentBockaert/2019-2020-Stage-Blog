@@ -16,7 +16,25 @@ source venv/bin/activate
 python3 -m pip install -r requirements.txt
 ----
 
-== Docker deployment
+== Production
+
+=== Docker containerization
+
+[TIP]
+Using a non-default network for the containers allows the containers to communicate with eachother by name instead of finding out the individual IP addresses, which are subject to change, names only change if you make them.
+.Create the Docker network of type bridged
+[source, bash]
+----
+# by default the driver is 'bridged'
+sudo docker network create stage_blog_net
+----
+
+.Create Database container
+[source, bash]
+----
+# cd into '2019-2019-Stage-Blog'
+sudo docker run --name stage_blog_db --network stage_blog_net --mount type=volume,source=mariadb_vol,destination=/var/lib/mysql,volume-label="color=blue",volume-label="shape=round" --env-file ./container/mariadb/.env mariadb
+----
 
 .Using the provided *_container_* folder
 [source, bash]
@@ -25,6 +43,79 @@ python3 -m pip install -r requirements.txt
 sudo docker image build -f ./container/app/Dockerfile -t stage_blog_im:latest .
 sudo docker container run --publish 5000:8000 --detach --network stage_blog_net --name stage_blog_app --env-file ~/2019-2020-Stage-Blog/container/app/.env stage_blog_im
 sudo docker exec stage_django_blog_cont python manage.py migrate --noinput
-sudo docker exec stage_django_blog_cont python manage.py createsuperuser
 ----
 
+=== NGinx reverse proxy 
+
+[WARNING]
+This is not a container, there really isn't that much of a case to be made for using a Docker container in my honest opinion.
+The moment you need to serve more than service you'd mostly end up with 2 nginx containers and quite likely a third NGinx service running on the host system to reverse_proxy.
+You'd basically end up having to do multiple reverse proxy's, which in my honest opinion sort of defeats the purpose of using NGinx in the first place.
+
+[TIP]
+Because of the above warning, we need to make sure that the "static files" are collected and hosted by our NGinx service running on the host system.
+Django with DEBUG=False (aka production environment), won't serve static content (which also includes media content).
+
+.To resolve this issue, make sure to execute the following commands
+[source, bash]
+----
+sudo apt install -y nginx
+sudo mkdir -p /var/www/blog.vincentbockaert.xyz/static # this is where the files will be hosted, Django container points STATIC_URL to this (see STATIC_ROOT)
+sudo chown -R $USER:$USER /var/www/blog.vincentbockaert.xyz/static
+sudo chmod 755 -R /var/www/blog.vincentbockaert.xyz/static
+# the following command assumes you are in 2019-2020-Stage-Blog/myBlog and using the python virtualenv (venv) as outlined in "linux development setup"
+python manage.py collectstatic # will collect all static files from your apps (including admin app) and put them in the folder specified by STATIC_ROOT
+----
+
+.NGinx config file, /etc/nginx/sites-available/blog.vincentbockaert.xyz
+====
+upstream stageblog {
+	server localhost:5000;
+}
+
+
+server  {
+	listen 80;
+	listen [::]:80;
+	server_name blog.vincentbockaert.xyz www.blog.vincentbockaert.xyz;
+
+	# proxy dynamic content to the backend application (django in this instance)
+	location / {
+		proxy_pass http://stageblog;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header Host $host;
+		proxy_redirect off;
+	}
+
+	location /static/ {
+		alias /var/www/blog.vincentbockaert.xyz/static/;
+	}
+}
+====
+
+.Don't forget to activate the config file
+[source, bash]
+----
+cd /etc/nginx/sites-enabled
+sudo ln -s /etc/nginx/sites-available/blog.vincentbockaert.xyz
+----
+
+.Reload and behold the mighty glory of your own blog
+[source, bash]
+----
+sudo nginx -t # tests the config for errors
+sudo systemctl restart nginx
+----
+
+== Gotcha's
+
+.Forgetting to enable and partially open the firewall
+[source, bash]
+----
+sudo ufw enable
+sudo ufw allow 'Nginx HTTP'
+sudo ufw reload
+sudo ufw status numbered
+----
+
+Don't forget to set DEBUG=False for the production environment, as well as setting the ALLOWED_HOSTS=["blog.vincentbockaert.xyz","wwww.blog.vincentbockaert.xyz","localhost"], both are set in settings.py.
