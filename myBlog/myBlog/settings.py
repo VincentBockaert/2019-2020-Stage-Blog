@@ -21,11 +21,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '4ms-bt82a@9+j59(uu=pl*opdjd6)c5v^ka+gt04x5ap)m%wb2'
+if os.getenv("SECRET_KEY") is not None:
+    SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["blog.vincentbockaert.xyz","www.blog.vincentbockaert.xyz","localhost"]
 
 
 # Application definition
@@ -151,3 +153,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/var/www/blog.vincentbockaert.xyz/static'

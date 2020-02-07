@@ -9,7 +9,6 @@ RUN useradd --system --shell /bin/bash --password "$(pwgen -n 32 -s -1)" app
 WORKDIR /usr/src/app
 
 # set environment variables
-RUN python3 -c "import secrets;s=secrets.token_hex(4);print(s);"
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 

@@ -1,0 +1,22 @@
+upstream stageblog {
+	server localhost:5000;
+}
+
+
+server  {
+	listen 80;
+	listen [::]:80;
+	server_name blog.vincentbockaert.xyz www.blog.vincentbockaert.xyz;
+
+	# proxy dynamic content to the backend application (django in this instance)
+	location / {
+		proxy_pass http://stageblog;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header Host $host;
+		proxy_redirect off;
+	}
+
+	location /static/ {
+		alias /var/www/blog.vincentbockaert.xyz/static/;
+	}
+}
