@@ -1,0 +1,2 @@
+SET SECRET_KEY=bae1shieReu4YieseisaiChei4Loovea
+SET DEBUG=1
