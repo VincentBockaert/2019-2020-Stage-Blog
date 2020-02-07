@@ -1,6 +1,10 @@
 # random stuff
 test.md 
-*/.vscode
+<<<<<<< HEAD
+.vscode/
+=======
+.vscode
+>>>>>>> parent of c7d3721... reset commit to fix of admin blog
 
 
 # Byte-compiled / optimized / DLL files
