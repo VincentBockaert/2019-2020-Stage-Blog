@@ -16,3 +16,16 @@ source venv/bin/activate
 python3 -m pip install -r requirements.txt
 ----
 
+== Docker deployment
+
+.Using the provided *_container_* folder
+[source, bash]
+----
+# cd into '2019-2019-Stage-Blog'
+sudo docker image build -f ./container/app/Dockerfile -t stage_blog_im:latest .
+sudo docker container run --publish 5000:8000 --detach --network stage_blog_net --name stage_blog_container stage_blog_im
+4fa453b10759316750f07b4168bda9a25f5dfb63447c933c1c8b32ef04fc27easudo docker run stage_django_blog:0.1 --name stage_django_blog_cont --network stage_blog_net --detached
+sudo docker exec stage_django_blog_cont python manage.py migrate --noinput
+sudo docker exec stage_django_blog_cont python manage.py createsuperuser
+----
+
