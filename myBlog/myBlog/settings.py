@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'myBlog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('ENGINE',default="django.db.backend.sqlite3"),
+        'ENGINE': os.getenv('ENGINE',default="django.db.backends.sqlite3"),
         'NAME': os.getenv("MYSQL_DB_NAME",default=os.path.join(BASE_DIR, 'db.sqlite3')),
         'USER': os.getenv("MYSQL_USER"),
         'PASSWORD': os.getenv("MYSQL_PASSWORD"),
