@@ -11,6 +11,7 @@ sudo apt update
 sudo apt install python3-venv python3-dev python3-wheel python3-pip gcc
 sudo apt install libmysqlclient-dev # otherwise pip install -r requirements.txt will fail due to missing mysql_config file
 cd '2019-2020-Stage-Blog'
+source dev.env # environment variables DEBUG and SECRET_KEY
 python3 -m venv venv
 source venv/bin/activate
 python3 -m pip install -r requirements.txt
@@ -68,7 +69,7 @@ python manage.py collectstatic # will collect all static files from your apps (i
 ----
 
 .NGinx config file, /etc/nginx/sites-available/blog.vincentbockaert.xyz
-====
+....
 upstream stageblog {
 	server localhost:5000;
 }
@@ -91,7 +92,7 @@ server  {
 		alias /var/www/blog.vincentbockaert.xyz/static/;
 	}
 }
-====
+....
 
 .Don't forget to activate the config file
 [source, bash]
@@ -119,3 +120,25 @@ sudo ufw status numbered
 ----
 
 Don't forget to set DEBUG=False for the production environment, as well as setting the ALLOWED_HOSTS=["blog.vincentbockaert.xyz","wwww.blog.vincentbockaert.xyz","localhost"], both are set in settings.py.
+
+[WARNING]
+Make sure to actually create the *.env* files, they are excluded from the repository for obvious security reasons, which means you need to set them yourself.
+
+.Example of the "./container/app/.env" file
+....
+MYSQL_PASSWORD=Azerty123
+MYSQL_PORT=3306
+MYSQL_DB_NAME=stageblog
+MYSQL_USER=client
+MYSQL_HOST=stage_blog_db
+DEBUG=0
+SECRET_KEY=ABCEDEJKDKFJDKJFKDJFKDJFDKFJKDFJD
+....
+
+.Example of the "./container/mariadb/.env" file
+....
+MYSQL_RANDOM_ROOT_PASSWORD=yes
+MYSQL_DATABASE=stageblog
+MYSQL_USER=client
+MYSQL_PASSWORD=Azerty123
+....

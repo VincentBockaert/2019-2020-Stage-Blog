@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import secrets
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,15 +21,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '4ms-bt82a@9+j59(uu=pl*opdjd6)c5v^ka+gt04x5ap)m%wb2'
-if os.getenv("SECRET_KEY") is not None:
-    SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv('SECRET_KEY', default=secrets.token_urlsafe(32))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = int(os.getenv('DEBUG',default=0)) # 0 = False, yeah I always forget this, don't judge me
 
 ALLOWED_HOSTS = ["blog.vincentbockaert.xyz","www.blog.vincentbockaert.xyz","localhost"]
-
 
 # Application definition
 
@@ -76,30 +74,10 @@ WSGI_APPLICATION = 'myBlog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {}
-
-# if os.getenv("MYSQL_PORT") is not None:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.mysql',
-#             'NAME': os.getenv("MYSQL_DB_NAME"),
-#             'USER': os.getenv("MYSQL_USER"),
-#             'PASSWORD': os.getenv("MYSQL_PASSWORD"),
-#             'HOST': os.getenv("MYSQL_HOST"),
-#             'PORT': os.getenv("MYSQL_PORT"),
-#         }
-#     }
-# else:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.sqlite3',
-#             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#         }
-#     }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv("MYSQL_DB_NAME"),
+        'ENGINE': os.getenv('ENGINE',default="django.db.backend.sqlite3"),
+        'NAME': os.getenv("MYSQL_DB_NAME",default=os.path.join(BASE_DIR, 'db.sqlite3')),
         'USER': os.getenv("MYSQL_USER"),
         'PASSWORD': os.getenv("MYSQL_PASSWORD"),
         'HOST': os.getenv("MYSQL_HOST"),
