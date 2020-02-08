@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block customcss %}
-    <link rel="stylesheet" type="text/css" href="{% static "/css/index.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "/css/common.css" %}">
 {% endblock %}
 
 {% block body %}
 <div class="container">
-    
+
     {% if latest_blog_posts_list %}
     <ul>
     {% for blogpost in latest_blog_posts_list %}
