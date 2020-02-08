@@ -26,7 +26,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', default=secrets.token_urlsafe(32))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.getenv('DEBUG',default=0)) # 0 = False, yeah I always forget this, don't judge me
 
-ALLOWED_HOSTS = ["blog.vincentbockaert.xyz","www.blog.vincentbockaert.xyz","localhost"]
+ALLOWED_HOSTS = ["blog.vincentbockaert.xyz","www.blog.vincentbockaert.xyz","localhost","127.0.0.1"]
 
 # Application definition
 
