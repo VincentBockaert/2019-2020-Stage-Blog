@@ -2,8 +2,7 @@
 Doc Writer <vincent.bockaert@student.odisee.be>
 :icons: font
 
-
-== linux development setup
+== linux development setup 
 
 [source, bash]
 ----
@@ -15,7 +14,40 @@ source dev.env # environment variables DEBUG and SECRET_KEY
 python3 -m venv venv
 source venv/bin/activate
 python3 -m pip install -r requirements.txt
+cd myBlog
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 manage.py runserver
+# go to localhost:8000/admin to create your first blog post
 ----
+
+== Windows development setup
+
+[IMPORTANT]
+I haven't actually tested this much, I love the ease of development that comes with using Linux, hence I rarely touch Windows, Python is still mainly developed for Linux. I give no guarantees that this'll work.
+Obviously you'll need to install "Docker Desktop" and have enabled Hyper-V on your Windows machine if you want to test the production environment, since it relies on containers, even then you'll miss out on the NGinx reverse-proxy rendering the efforts mute.
+*In conclusion:* Only use Windows if you're only going to work in a purely development environment, this means, using SQlite instead of MariaDb (though you can do MariaDb/MySQL with some slight edits) and running with DEBUG=True, otherwise the *_static_* content won't load (your CSS, potential JavaScript files, etc).
+
+.Requirements:
+* Have Python installed, at least 3.6
+* You mind need Visual Studio Build Tools to compile certain Python wheels (likely if trying to use mysqlclient)
+** If you don't want to use mysqlclient (which I recommend you don't on Windows, SQLite is enough for dev env), remove it from the requirements.txt file
+
+[source, cmd]
+----
+# sets DEBUG=True and SECRET_KEY value
+./env_setup.bat 
+python -m venv venv
+venv\Script\activate # you mind need to set --ExecutionPolicy ByPass if using Powershell instead of cmd
+python -m pip install -r requirements.txt
+cd myBlog
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+# go to localhost:8000/admin to create your first blog post
+----
+
 
 == Production
 
