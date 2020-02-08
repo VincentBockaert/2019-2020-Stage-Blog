@@ -9,7 +9,7 @@ class Author(models.Model):
         return self.full_name
 
 class Blog(models.Model):
-    pub_date = models.DateTimeField('Date published')
+    pub_date = models.DateTimeField('Date published',default=timezone.now())
     title = models.CharField(max_length=200)
     description = models.TextField(default="No description was found.")
     content = models.TextField()
