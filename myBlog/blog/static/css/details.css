@@ -6,8 +6,17 @@
 
 #descriptive h1,
 #descriptive h2,
-#descriptive p {
+#descriptive p,
+#descriptive a {
     color: #c5c5c5;
+}
+
+#descriptive a {
+    text-decoration: none;
+}
+
+#descriptive a:hover {
+    color: white;
 }
 
 

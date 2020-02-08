@@ -5,8 +5,6 @@
     <link rel="stylesheet" type="text/css" href="{% static "/css/common.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "/css/details.css" %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/monokai.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
     <style>
         .markdown-body {
             box-sizing: border-box;
@@ -32,9 +30,10 @@
             <h1>{{ title }}</h1>
         </div>
         <div class="flexy">
-            <p>Written by {{ author }}</p>
-            <p>Published on {{ pub_date }}</p>
-            <p>Last edited on {{ last_edited_date }}</p>
+            <p><a href="/">Home</a></p>
+            <p>Author - {{ author }}</p>
+            <p>Date: {{ pub_date }}</p>
+            <p>Last edit: {{ last_edited_date }}</p>
         </div>
     </section>
     <section id="content">
@@ -45,17 +44,19 @@
             <h5>Made possible by:</h5>
         </div>
         <div class="flexy">
-            <p>Python</p>
-            <p>The Django Framework</p>
-            <p>MariaDb</p>
-            <p>Docker (Django & MariaDb container)</p>
-            <p>NGinx</p>
+            <p><a href="https://www.python.org/">Python</a></p>
+            <p><a href="https://www.djangoproject.com/">The Django Framework</a></p>
+            <p><a href="https://mariadb.org/">MariaDb</a></p>
+            <p><a href="https://www.docker.com">Docker (Django & MariaDb container)</a></p>
+            <p><a href="https://www.nginx.com/">Nginx</a></p>
         </div>
     </footer>
 </section>
 {% endblock %}
 
 {% block customjs %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 <script type="text/javascript">
     console.log("This application makes use of Markdown to quickly write the blog posts :D.")
 </script>
