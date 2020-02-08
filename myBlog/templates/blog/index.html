@@ -7,12 +7,38 @@
 
 {% block body %}
 <div class="container">
-
+    <div class="jumbotron">
+        <div class="center-children">
+            <h1 class="display-6">Blog stage 2019-2020</h1>
+            <h2 class="display-8">Vincent Bockaert</h2>
+        </div>
+        <p class="lead">Deze blog heb ik zelf opgezet in het kader van mijn stage bij Inverto Nv, via Odisee, Technologiecampus Gent (hogeschool).</p>
+        <hr>
+        <p>De site maakt gebruik van enkele frameworks en technologiëen om mijn werk te verminderen.</p>
+        <p>Deze zijn onder andere Django, BootStrap, Markdown (vergemakkelijkt het schrijven van de blog posts) in samenwerking met HighLight.js.</p>
+        <p>Indien interesse kan je altijd één van de blog posts lezen door op één van de onderstaande links te klikken.</p>
+    </div>
+    <!-- <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+    <hr class="my-4">
+    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a> -->
     {% if latest_blog_posts_list %}
     <ul>
     {% for blogpost in latest_blog_posts_list %}
-        <li><a href="/blog/{{ blogpost.id }}/">{{ blogpost.title }}</a></li>
-        <li><p>{{ blog.description }}</p></li>
+        <!-- <li><a href="/blog/{{ blogpost.id }}/" class="btn btn-secondary">{{ blogpost.title }}</a></li> -->
+        <li>
+            <p>
+                <a class="btn btn-secondary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    {{ blogpost.title }}
+                </a>
+            </p>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    <p>{{ blogpost.description }}</p>
+                    <p>Zie de <a href="/blog/{{ blogpost.id }}/">details</a></p>
+                </div>
+            </div>
+        </li>
     {% endfor %}
     </ul>
     {% else %}

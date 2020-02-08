@@ -14,3 +14,16 @@ div.flexy {
 a {
     text-decoration: none !important; 
 }
+
+.center-children {
+    text-align: center;
+}
+
+.jumbotron {
+    background-color: #14191f;
+    color: #c5c5c5;
+}
+
+hr {
+    border-top: 1px solid white;;
+}
