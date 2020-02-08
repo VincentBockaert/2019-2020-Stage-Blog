@@ -2,8 +2,9 @@
 {% load static %}
 
 {% block customcss %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/monokai.min.css">
     <link rel="stylesheet" type="text/css" href="{% static "/css/common.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "/css/details.css" %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/monokai.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
     <style>
@@ -24,9 +25,33 @@
 {% endblock %}
 
 {% block body %}
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <section class="markdown-body">
-    {{ content|safe }}
+    <section id="descriptive">
+        <div class="center-children">
+            <h1>{{ title }}</h1>
+        </div>
+        <div class="flexy">
+            <p>Written by {{ author }}</p>
+            <p>Published on {{ pub_date }}</p>
+            <p>Last edited on {{ last_edited_date }}</p>
+        </div>
+    </section>
+    <section id="content">
+        {{ content|safe }}
+    </section>
+    <footer>
+        <div class="center-children">
+            <h5>Made possible by:</h5>
+        </div>
+        <div class="flexy">
+            <p>Python</p>
+            <p>The Django Framework</p>
+            <p>MariaDb</p>
+            <p>Docker (Django & MariaDb container)</p>
+            <p>NGinx</p>
+        </div>
+    </footer>
 </section>
 {% endblock %}
 

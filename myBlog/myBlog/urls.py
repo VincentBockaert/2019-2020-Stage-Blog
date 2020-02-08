@@ -21,5 +21,6 @@ from blog.feeds import LatestPostsFeed
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('blog.urls')),
+    path('blog/',include('blog.urls')),
     path('feed/', LatestPostsFeed()),
 ]

@@ -12,6 +12,7 @@
     <ul>
     {% for blogpost in latest_blog_posts_list %}
         <li><a href="/blog/{{ blogpost.id }}/">{{ blogpost.title }}</a></li>
+        <li><p>{{ blog.description }}</p></li>
     {% endfor %}
     </ul>
     {% else %}

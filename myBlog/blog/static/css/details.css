@@ -1,0 +1,37 @@
+#descriptive {
+    background-color: #14191f;
+    padding-right: 2rem;
+    padding-left: 2rem;
+}
+
+#descriptive h1,
+#descriptive h2,
+#descriptive p {
+    color: #c5c5c5;
+}
+
+
+.center-children {
+    text-align: center;
+}
+
+#content {
+    background-color: #cccccc;
+    padding-top: 1rem;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+footer {
+    padding-top: 1rem;
+    background-color: #14191f;
+}
+
+footer h5,
+footer p,
+footer a {
+    color: #c5c5c5;
+}
+

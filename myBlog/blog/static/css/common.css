@@ -1,3 +1,13 @@
 body {
     background-color: hsl(210, 25%, 8%);
 }
+
+section.markdown-body {
+    margin-top: 1rem;
+}
+
+div.flexy {
+    display: flex;
+    justify-content: space-around;
+}
+
