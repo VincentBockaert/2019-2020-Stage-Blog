@@ -27,3 +27,7 @@ a {
 hr {
     border-top: 1px solid white;;
 }
+
+div.card-body {
+    margin-bottom: 1rem;
+}

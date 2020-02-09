@@ -30,11 +30,11 @@
         <!-- <li><a href="/blog/{{ blogpost.id }}/" class="btn btn-secondary">{{ blogpost.title }}</a></li> -->
         <li>
             <p>
-                <a class="btn btn-secondary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <a class="btn btn-secondary" data-toggle="collapse" href="#collapseExample{{blogpost.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
                     {{ blogpost.title }}
                 </a>
             </p>
-            <div class="collapse" id="collapseExample">
+            <div class="collapse" id="collapseExample{{blogpost.id}}">
                 <div class="card card-body">
                     <p>{{ blogpost.description }}</p>
                     <p>Zie de <a href="/blog/{{ blogpost.id }}/">details</a></p>
