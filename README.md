@@ -214,7 +214,12 @@ Dit moet je uiteraard ook aanpassen in je Nginx configuratie, uiteraard moet je 
 
 Controleer als alle containers _OK_ zijn via `sudo docker container ls -a`.
 
+Indien dit nog nooit gedaan was is het nu best het moment om de firewall te configureren.
 
+    sudo ufw enable
+    sudo ufw allow 'Nginx HTTP'
+    sudo ufw reload
+    sudo ufw status numbered
 
 
 
