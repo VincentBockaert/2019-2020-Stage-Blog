@@ -132,3 +132,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/var/www/blog.vincentbockaert.xyz/static'
+LOGIN_URL='/admin'
